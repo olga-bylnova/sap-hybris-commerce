@@ -1,0 +1,5 @@
+$product = product(code, catalogVersion(catalog(id[default = 'powertoolsProductCatalog']), version[default = 'Staged']))
+
+INSERT_UPDATE Question; code[unique = true]; $product; question        ; questionCustomer(uid)
+                      ; Q001               ; 1221409 ; Test question 1 ; testuser1@test.com
+                      ; Q002               ; 1128762 ; Test question 2 ; wei.liu@homemail.ch
