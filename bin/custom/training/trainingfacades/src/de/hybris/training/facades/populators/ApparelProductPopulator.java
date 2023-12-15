@@ -53,7 +53,6 @@ public class ApparelProductPopulator implements Populator<ProductModel, ProductD
 	public void populate(final ProductModel source, final ProductData target) throws ConversionException
 	{
 		final ProductModel baseProduct = getBaseProduct(source);
-
 		if (baseProduct instanceof ApparelProductModel)
 		{
 			final ApparelProductModel apparelProductModel = (ApparelProductModel) baseProduct;
@@ -66,15 +65,15 @@ public class ApparelProductPopulator implements Populator<ProductModel, ProductD
 				}
 				target.setGenders(genders);
 			}
-			if (CollectionUtils.isNotEmpty(apparelProductModel.getQuestions()))
+		}
+		if (CollectionUtils.isNotEmpty(baseProduct.getQuestions()))
+		{
+			final List<QuestionData> questions = new ArrayList<QuestionData>();
+			for (final QuestionModel question : baseProduct.getQuestions())
 			{
-				final List<QuestionData> questions = new ArrayList<QuestionData>();
-				for (final QuestionModel question : apparelProductModel.getQuestions())
-				{
-					questions.add(getQuestionConverter().convert(question));
-				}
-				target.setQuestions(questions);
+				questions.add(getQuestionConverter().convert(question));
 			}
+			target.setQuestions(questions);
 		}
 	}
 

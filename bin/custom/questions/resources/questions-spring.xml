@@ -13,8 +13,7 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd">
            
-    <context:annotation-config/> 
-    <context:component-scan base-package="questions.controllers" scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver"/>
+    <context:annotation-config/>
 
 	<bean id="questionsCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener">
 		<property name="supportedChannels">
@@ -36,16 +35,4 @@
 	<bean id="questionsSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener"  >
 		<property name="extensionName" value="questions" />
 	</bean>
-
-	<alias name="acceleratorQuestionConverter" alias="questionConverter"/>
-	<bean id="acceleratorQuestionConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="questions.data.QuestionData"/>
-		<property name="populators">
-			<list>
-				<ref bean="questionDataPopulator"/>
-			</list>
-		</property>
-	</bean>
-	<alias name="defaultQuestionDataPopulator" alias="questionDataPopulator"/>
-	<bean id="defaultQuestionDataPopulator" class="questions.populators.QuestionDataPopulator" />
 </beans>
