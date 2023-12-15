@@ -16,5 +16,11 @@
 		<property name="flag" type="boolean"/>
 	</bean>
 	-->
-
+	<bean class="questions.data.QuestionData">
+		<description>Data object for a question</description>
+		<property name="question" type="String"/>
+		<property name="questionCustomer" type="String"/>
+		<property name="answer" type="String"/>
+		<property name="answerCustomer" type="String"/>
+	</bean>
 </beans>
