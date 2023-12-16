@@ -5,8 +5,8 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
 
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
-		<property name="genders" type="java.util.List&lt;de.hybris.training.facades.product.data.GenderData>"/>
-		<property name="questions" type="java.util.List&lt;questions.data.QuestionData>"/>
+		<property name="genders" type="java.util.List&lt;de.hybris.training.facades.product.data.GenderData&gt;"/>
+		<property name="questions" type="java.util.List&lt;questions.data.QuestionData&gt;"/>
 	</bean>
 
 	<bean class="de.hybris.training.facades.product.data.GenderData">

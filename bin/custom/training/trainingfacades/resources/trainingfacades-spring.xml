@@ -74,17 +74,6 @@
 		<property name="genderConverter" ref="genderConverter"/>
 		<property name="questionConverter" ref="questionConverter"/>
 	</bean>
-	<alias name="acceleratorQuestionConverter" alias="questionConverter"/>
-	<bean id="acceleratorQuestionConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="questions.data.QuestionData"/>
-		<property name="populators">
-			<list>
-				<ref bean="questionDataPopulator"/>
-			</list>
-		</property>
-	</bean>
-	<alias name="defaultQuestionDataPopulator" alias="questionDataPopulator"/>
-	<bean id="defaultQuestionDataPopulator" class="de.hybris.training.facades.populators.QuestionDataPopulator" />
 
 	<!-- Add the apparelProductPopulator to the productConverter -->
 	<bean parent="modifyPopulatorList">
