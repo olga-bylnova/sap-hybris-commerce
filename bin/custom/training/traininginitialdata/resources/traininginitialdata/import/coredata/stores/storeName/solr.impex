@@ -36,8 +36,10 @@ INSERT_UPDATE SolrSearchConfig;description[unique=true];pageSize
 #
 
 # Declare the indexed type Product
-INSERT_UPDATE SolrIndexedProperty	;solrIndexedType(identifier)[unique=true]	;name[unique=true]	;type(code)	;localized[default=false]	;fieldValueProvider
-;$solrIndexedType							;questionsCount              	;string		;false						;productQuestionsValueProvider
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true]         ;facet[default=true]   ;facetType(code);priority   ;facetDisplayNameProvider;facetSortProvider;facetTopValuesProvider;includeInResponse[default=true];searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType]
+                                  ;questionsCount:$solrIndexedType                                       ;	                     ;MultiSelectOr	   ;5000	   ;			            ;				  ;						 ;                       ;
+
+
 INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&sortRefID)
 
 INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];description;indexNamePrefix;languages(isocode);currencies(isocode);solrServerConfig(name);solrSearchConfig(description);solrIndexConfig(name);solrIndexedTypes(identifier);enabledLanguageFallbackMechanism;$catalogVersions
@@ -46,10 +48,14 @@ UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
 
 # Define price range set
 INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
+;questionsCountRange;;int;rangeRefQC1,rangeRefQC2,rangeRefQC3,rangeRefQC4
 
 # Define price ranges
 INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
-
+                            ;rangeRefQC1 ;questionsCountRange;0;   0;0
+                            ;rangeRefQC2 ;questionsCountRange;1;   1; 1
+                            ;rangeRefQC3 ;questionsCountRange;2;   2; 2
+                            ;rangeRefQC4 ;questionsCountRange;3 and more;   3; 100
 # Non-facet properties
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameter
 
@@ -61,7 +67,7 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 
 # Other facet properties
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name)
-
+;$solrIndexedType;questionsCount; int; ;;;;;MultiSelectOr;Alpha;4000;true;;;productQuestionsValueProvider;;;defaultTopValuesProvider;questionsCountRange
 # Create the queries that will be used to extract data for Solr
 INSERT_UPDATE SolrIndexerQuery;solrIndexedType(identifier)[unique=true];identifier[unique=true];type(code);injectCurrentDate[default=true];injectCurrentTime[default=true];injectLastIndexTime[default=true];query;user(uid)
 
