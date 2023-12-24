@@ -18,6 +18,8 @@ import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
+import questions.data.QuestionData;
+import questions.model.QuestionModel;
 
 
 /**
@@ -26,6 +28,7 @@ import org.springframework.beans.factory.annotation.Required;
 public class ApparelProductPopulator implements Populator<ProductModel, ProductData>
 {
 	private Converter<Gender, GenderData> genderConverter;
+	private Converter<QuestionModel, QuestionData> questionConverter;
 
 	protected Converter<Gender, GenderData> getGenderConverter()
 	{
@@ -38,11 +41,18 @@ public class ApparelProductPopulator implements Populator<ProductModel, ProductD
 		this.genderConverter = genderConverter;
 	}
 
+	public Converter<QuestionModel, QuestionData> getQuestionConverter() {
+		return questionConverter;
+	}
+	@Required
+	public void setQuestionConverter(Converter<QuestionModel, QuestionData> questionConverter) {
+		this.questionConverter = questionConverter;
+	}
+
 	@Override
 	public void populate(final ProductModel source, final ProductData target) throws ConversionException
 	{
 		final ProductModel baseProduct = getBaseProduct(source);
-
 		if (baseProduct instanceof ApparelProductModel)
 		{
 			final ApparelProductModel apparelProductModel = (ApparelProductModel) baseProduct;
@@ -55,6 +65,15 @@ public class ApparelProductPopulator implements Populator<ProductModel, ProductD
 				}
 				target.setGenders(genders);
 			}
+		}
+		if (CollectionUtils.isNotEmpty(baseProduct.getQuestions()))
+		{
+			final List<QuestionData> questions = new ArrayList<QuestionData>();
+			for (final QuestionModel question : baseProduct.getQuestions())
+			{
+				questions.add(getQuestionConverter().convert(question));
+			}
+			target.setQuestions(questions);
 		}
 	}
 

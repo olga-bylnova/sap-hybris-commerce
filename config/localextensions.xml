@@ -1,6 +1,7 @@
 <hybrisconfig xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../bin/platform/resources/schemas/extensions.xsd'>
   <extensions>
     <path dir='/opt/hybris/hybris/bin' autoload='false' />
+    <extension dir="/opt/hybris/hybris/bin/custom/questions"/>
     <extension dir="/opt/hybris/hybris/bin/custom/training/trainingbackoffice"/>
     <extension dir="/opt/hybris/hybris/bin/custom/training/trainingcore"/>
     <extension dir="/opt/hybris/hybris/bin/custom/training/traininginitialdata"/>
