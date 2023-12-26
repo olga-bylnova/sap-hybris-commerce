@@ -1,0 +1,14 @@
+$productCatalog = electronicsProductCatalog
+$catalogVersionStaged = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = '$productCatalog:Staged']
+
+INSERT_UPDATE UserPriceGroup; code[unique = true]; name[lang = en]
+                            ; orderPricesGroup   ; "Order prices group"
+
+
+INSERT_UPDATE PriceRow; product(code, $catalogVersionStaged)[unique = true]; currency(isocode)[unique = true]; price; net[unique = true, default = false]; ug(code)[allownull = true]; unit(code)[default = pieces]; minqtd; unitFactor
+                      ; 816323                                             ; USD                             ; 300  ; false                              ; orderPricesGroup          ;                             ; 3     ; 1
+                      ; 816802                                             ; USD                             ; 225  ; false                              ; orderPricesGroup          ;                             ; 3     ; 1
+
+
+UPDATE Customer; uid[unique = true]; Europe1PriceFactory_UPG(code)
+               ; xxtest@gmail.com  ; orderPricesGroup
