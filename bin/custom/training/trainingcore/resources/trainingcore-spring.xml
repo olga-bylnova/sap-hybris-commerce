@@ -504,6 +504,13 @@
 		<property name="timeService" ref="timeService" />
 	</bean>
 
+	<bean id="questionsCreatedJobPerformable"
+		  class="de.hybris.training.core.job.QuestionsCreatedJobPerformable"
+		  parent="abstractJobPerformable">
+		<property name="eventService" ref="eventService" />
+		<property name="questionDao" ref="questionDao"/>
+	</bean>
+
 	<import resource="/trainingcore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/trainingcore/processes/quote/quote-salesrep-process-spring.xml"/>
 	<import resource="/trainingcore/processes/quote/quote-seller-approval-process-spring.xml"/>
@@ -543,5 +550,9 @@
 	<bean id="defaultCSTicketStagnationAction" class="de.hybris.training.core.retention.impl.DefaultCSTicketStagnationAction" parent="abstractExtensibleRemoveCleanupAction">
 		<property name="itemCleanupHooks" ref="csTicketRetentionHooks"/>
 		<property name="ticketBusinessService" ref="ticketBusinessService"/>
+	</bean>
+
+	<bean id="questionDao" class="de.hybris.training.core.daos.DefaultQuestionDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
 </beans>

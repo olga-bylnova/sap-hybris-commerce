@@ -71,3 +71,5 @@ build/config/developer.properties
 
 bin/custom/training/trainingstorefront/web/addonsrc/questions
 bin/custom/training/trainingstorefront/web/webroot/WEB-INF/views/addons/questions/responsive
+
+**/jalo
