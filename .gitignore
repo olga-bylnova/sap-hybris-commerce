@@ -5,7 +5,7 @@
 !/bin/custom
 /roles
 /data
-
+config/
 bin/**/gensrc
 bin/**/eclipsebin
 bin/**/classes
