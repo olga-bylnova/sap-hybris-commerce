@@ -258,6 +258,10 @@
 	</bean>
 
 	<!-- Process resources definition -->
+	<bean id="questionsUpdateEmailProcessDefinitionResource"
+		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/trainingcore/processes/questionsUpdateEmailProcess.xml"/>
+	</bean>
 
 	<bean id="customerRegistrationEmailProcessDefinitionResource"
 	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
@@ -318,6 +322,10 @@
 		<property name="cmsEmailPageService" ref="cmsEmailPageService"/>
 		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy"/>
 		<property name="emailGenerationService" ref="emailGenerationService"/>
+	</bean>
+
+	<bean id="questionsUpdateEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="QuestionsUpdateEmailTemplate"/>
 	</bean>
 
 	<bean id="generateCustomerRegistrationEmail" parent="abstractGenerateEmailAction">
@@ -507,8 +515,10 @@
 	<bean id="questionsCreatedJobPerformable"
 		  class="de.hybris.training.core.job.QuestionsCreatedJobPerformable"
 		  parent="abstractJobPerformable">
-		<property name="eventService" ref="eventService" />
-		<property name="questionDao" ref="questionDao"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="cronJobHistoryService" ref="cronJobHistoryService"/>
 	</bean>
 
 	<import resource="/trainingcore/processes/quote/quote-buyer-process-spring.xml"/>
