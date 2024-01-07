@@ -29,8 +29,25 @@
 
     <itemtypes>
 
+        <itemtype generate="true"
+                  code="QuestionsCreatedJobPerformable"
+                  jaloclass="de.hybris.training.core.jalo.QuestionsCreatedJobPerformable"
+                  extends="CronJob"
+                  autocreate="true"/>
         <!-- Add your item definitions here -->
-
+        <itemtype code="QuestionsUpdateEmailProcess" extends="StoreFrontCustomerProcess" jaloclass="de.hybris.training.core.jalo.process.QuestionsUpdateEmailProcess">
+            <attributes>
+                <attribute qualifier="date" type="java.util.Date">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="email" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="displayName" type="java.lang.String">
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
 
         <!-- TypeGroups are for structure of this file only -->
 

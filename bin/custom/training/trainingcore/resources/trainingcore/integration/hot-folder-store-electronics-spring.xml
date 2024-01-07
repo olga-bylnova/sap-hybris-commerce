@@ -3,11 +3,11 @@
  Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:int="http://www.springframework.org/schema/integration"
-	xmlns:file="http://www.springframework.org/schema/integration/file"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:int="http://www.springframework.org/schema/integration"
+	   xmlns:file="http://www.springframework.org/schema/integration/file"
+	   xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/integration
 		http://www.springframework.org/schema/integration/spring-integration.xsd
@@ -36,5 +36,22 @@
 		<property name="catalog" value="electronicsProductCatalog" />
 		<property name="net" value="false" />
 		<property name="storeBaseDirectory" ref="baseDirectoryElectronics" />
+	</bean>
+
+	<bean id="productDescriptionConverterMapping"
+		  class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+		  p:mapping="productDescription"
+		  p:converter-ref="productDescriptionConverter"/>
+
+	<bean id="productDescriptionConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
+		<property name="header">
+			<value>
+				#{defaultImpexProductHeader}
+				INSERT_UPDATE Product;$catalogVersion;code[unique=true];description[lang=$lang]
+			</value>
+		</property>
+		<property name="impexRow">
+			<value>;;{+0};{1}</value>
+		</property>
 	</bean>
 </beans>

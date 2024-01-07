@@ -127,6 +127,10 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="questionsUpdateEmailContextEmailContext" class="de.hybris.training.facades.process.email.context.QuestionsUpdateEmailContext" parent="abstractEmailContext" scope="prototype">
+		<property name="questionConverter" ref="questionConverter"/>
+		<property name="questionDao" ref="questionDao"/>
+	</bean>
 
 	<bean id="customerEmailContext" class="de.hybris.training.facades.process.email.context.CustomerEmailContext" parent="abstractEmailContext" scope="prototype" >
 		<property name="customerConverter" ref="customerConverter"/>
