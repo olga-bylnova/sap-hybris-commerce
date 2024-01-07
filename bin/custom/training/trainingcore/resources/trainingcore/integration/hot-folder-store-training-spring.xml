@@ -36,10 +36,15 @@
 
     <bean id="trainingHeaderSetupTask"
           class="de.hybris.platform.acceleratorservices.dataimport.batch.task.HeaderSetupTask">
-        <property name="catalog" value="trainingProductCatalog"/>
+        <property name="catalog" value="electronicsProductCatalog"/>
         <property name="net" value="false"/>
         <property name="storeBaseDirectory" ref="baseDirectoryTraining"/>
     </bean>
+
+    <bean id="stockLevelConverterMapping"
+          class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.mapping.impl.DefaultConverterMapping"
+          p:mapping="stockLevel"
+          p:converter-ref="stockLevelConverter"/>
 
     <bean id="stockLevelConverter" class="de.hybris.platform.acceleratorservices.dataimport.batch.converter.impl.DefaultImpexConverter">
         <property name="header">
