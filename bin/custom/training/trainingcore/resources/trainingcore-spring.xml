@@ -17,6 +17,7 @@
 	<import resource="classpath:/trainingcore/integration/hot-folder-store-electronics-spring.xml"/>
 	<import resource="classpath:/trainingcore/integration/hot-folder-store-apparel-spring.xml"/>
 	<import resource="classpath:/trainingcore/integration/hot-folder-common-spring.xml"/>
+	<import resource="classpath:/trainingcore/integration/hot-folder-store-training-spring.xml"/>
 
 	<!-- SystemSetup for the TrainingCore -->
 	<bean id="acceleratorCoreSystemSetup" class="de.hybris.training.core.setup.CoreSystemSetup"
@@ -257,6 +258,10 @@
 	</bean>
 
 	<!-- Process resources definition -->
+	<bean id="questionsUpdateEmailProcessDefinitionResource"
+		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/trainingcore/processes/questionsUpdateEmailProcess.xml"/>
+	</bean>
 
 	<bean id="customerRegistrationEmailProcessDefinitionResource"
 	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
@@ -317,6 +322,10 @@
 		<property name="cmsEmailPageService" ref="cmsEmailPageService"/>
 		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy"/>
 		<property name="emailGenerationService" ref="emailGenerationService"/>
+	</bean>
+
+	<bean id="questionsUpdateEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="QuestionsUpdateEmailTemplate"/>
 	</bean>
 
 	<bean id="generateCustomerRegistrationEmail" parent="abstractGenerateEmailAction">
@@ -503,6 +512,15 @@
 		<property name="timeService" ref="timeService" />
 	</bean>
 
+	<bean id="questionsCreatedJobPerformable"
+		  class="de.hybris.training.core.job.QuestionsCreatedJobPerformable"
+		  parent="abstractJobPerformable">
+		<property name="businessProcessService" ref="businessProcessService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="cronJobHistoryService" ref="cronJobHistoryService"/>
+	</bean>
+
 	<import resource="/trainingcore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/trainingcore/processes/quote/quote-salesrep-process-spring.xml"/>
 	<import resource="/trainingcore/processes/quote/quote-seller-approval-process-spring.xml"/>
@@ -542,5 +560,9 @@
 	<bean id="defaultCSTicketStagnationAction" class="de.hybris.training.core.retention.impl.DefaultCSTicketStagnationAction" parent="abstractExtensibleRemoveCleanupAction">
 		<property name="itemCleanupHooks" ref="csTicketRetentionHooks"/>
 		<property name="ticketBusinessService" ref="ticketBusinessService"/>
+	</bean>
+
+	<bean id="questionDao" class="de.hybris.training.core.daos.DefaultQuestionDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
 </beans>
