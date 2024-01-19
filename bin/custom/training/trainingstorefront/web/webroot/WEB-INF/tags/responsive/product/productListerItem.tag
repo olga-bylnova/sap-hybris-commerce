@@ -32,6 +32,11 @@
 			<span class="fa fa-comment"></span>
 			<span class="questionsCount">${product.questionsCount}</span>
 		</div>
+		<div>
+			<c:if test="${not empty product.warrantyYears}">
+				<span class="warrantyYears">Warranty: ${product.warrantyYears} years</span>
+			</c:if>
+		</div>
 		<div class="product__list--price-panel">
 			<c:if test="${not empty product.potentialPromotions}">
 				<div class="product__listing--promo">
