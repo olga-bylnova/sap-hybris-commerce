@@ -8,6 +8,7 @@
 		<property name="genders" type="java.util.List&lt;de.hybris.training.facades.product.data.GenderData&gt;"/>
 		<property name="questions" type="java.util.List&lt;questions.data.QuestionData&gt;"/>
 		<property name="questionsCount" type="int"/>
+		<property name="warrantyYears" type="Integer"/>
 	</bean>
 
 	<bean class="de.hybris.training.facades.product.data.GenderData">

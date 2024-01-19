@@ -49,6 +49,14 @@
             </attributes>
         </itemtype>
 
+        <itemtype code="Product" autocreate="false" generate="true">
+            <attributes>
+                <attribute qualifier="warrantyYears" type="java.lang.Integer">
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
         <!-- TypeGroups are for structure of this file only -->
 
         <typegroup name="Apparel">

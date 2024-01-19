@@ -75,6 +75,7 @@ public class ApparelProductPopulator implements Populator<ProductModel, ProductD
 			}
 			target.setQuestions(questions);
 		}
+		target.setWarrantyYears(source.getWarrantyYears());
 	}
 
 	protected ProductModel getBaseProduct(final ProductModel productModel)
